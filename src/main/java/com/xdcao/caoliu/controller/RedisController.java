@@ -5,10 +5,7 @@ import com.google.common.collect.Lists;
 import com.xdcao.caoliu.model.VideoContent;
 import com.xdcao.caoliu.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,6 +18,7 @@ import java.util.List;
  */
 
 @RestController
+@CrossOrigin(value = "*")
 public class RedisController {
 
     @Autowired
@@ -29,20 +27,9 @@ public class RedisController {
     @RequestMapping("/all/page")
     @ResponseBody
     public String allKeys(@RequestParam("page") int page){
-        List<VideoContent> allKVs = redisService.getAllVideoContents("http*");
-        Collections.sort(allKVs, new Comparator<VideoContent>() {
-            @Override
-            public int compare(VideoContent o1, VideoContent o2) {
-                long time = o1.getCreated().getTime() - o2.getCreated().getTime();
-                return (int)time;
-            }
-        });
-        List<List<VideoContent>> partition = Lists.partition(allKVs, 10);
-        if (page > partition.size()) {
-            return "";
-        }
-
-        return JSON.toJSONString(partition.get(page-1));
+        return JSON.toJSONString(redisService.getDataByPage(page));
     }
+
+
 
 }

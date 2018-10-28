@@ -21,6 +21,8 @@ public class VideoContent implements Serializable {
 
     private String videoUrl = "";
 
+    private String videoPageUrl = "";
+
     private String filePath = "";
 
     private boolean completed = false;
@@ -105,5 +107,13 @@ public class VideoContent implements Serializable {
 
     public void setPreviewUrl(String previewUrl) {
         this.previewUrl = previewUrl;
+    }
+
+    public String getVideoPageUrl() {
+        return videoPageUrl;
+    }
+
+    public void setVideoPageUrl(String videoPageUrl) {
+        this.videoPageUrl = videoPageUrl;
     }
 }

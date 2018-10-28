@@ -1,17 +1,17 @@
 package com.xdcao.caoliu.redis;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.xdcao.caoliu.model.VideoContent;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestParam;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: buku.ch
@@ -158,6 +158,24 @@ public class RedisService {
             jedis.close();
         }
     }
+
+    public List<VideoContent> getDataByPage(int page) {
+        List<VideoContent> allKVs = getAllVideoContents("http*");
+        allKVs.sort(new Comparator<VideoContent>() {
+            @Override
+            public int compare(VideoContent o1, VideoContent o2) {
+                long time = o1.getCreated().getTime() - o2.getCreated().getTime();
+                return (int) time;
+            }
+        });
+        List<List<VideoContent>> partition = Lists.partition(allKVs, 8);
+        if (page > partition.size()) {
+            return new ArrayList<VideoContent>();
+        }
+
+        return partition.get(page-1);
+    }
+
 
 
 }

@@ -42,7 +42,7 @@ public class VideoUrlParser extends AbstractParser {
 
     public static final Pattern VIDEO_PATTERN = Pattern.compile(VIDEO_REGEXP);
 
-    public static final String PREVIEW_REGEXP = "(http*://[0-9a-zA-Z]+.[0-9a-zA-Z]+.com/contents/.*/preview.mp4.jpg)";
+    public static final String PREVIEW_REGEXP = "pre.*(http.*://[0-9a-zA-Z]+.[0-9a-zA-Z]+.com/contents/.*/preview.mp4.jpg)";
 
     public static final Pattern PREVIEW_PATTERN = Pattern.compile(PREVIEW_REGEXP);
 
@@ -87,9 +87,12 @@ public class VideoUrlParser extends AbstractParser {
                     videoContent.setTitle(inContent.getTitle());
                     videoContent.setType(VideoType.VideoURL);
                     videoContent.setVideoUrl(videoMatcher.group(0));
+                    videoContent.setVideoPageUrl(videoPage);
+                    System.out.println(videoPage);
 
                     if (previewMatcher.find()) {
-                        videoContent.setPreviewUrl(previewMatcher.group(0));
+                        videoContent.setPreviewUrl(previewMatcher.group(1));
+                        System.out.println(previewMatcher.group(1));
                     }
 
                     contents.add(videoContent);
