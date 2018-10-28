@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="Default" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="shortcut icon" type="image/png" th:href="@{/favicon.png}">
+    
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}">
+	
+    
+	<script th:src="@{/js/jquery-2.1.0.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/blocs.min.js}"></script>
+	<script th:src="@{/js/lazysizes.min.js}" defer></script>
+    <title>Home</title>
+
+    
+<!-- Google Analytics -->
+ 
+<!-- Google Analytics END -->
+    
+</head>
+<body>
+
+<script>
+
+    function clickImg(obj) {
+        window.open(obj.attr("href"));
+    }
+
+    function doSearch(obj) {
+        console.log("you click");
+        var text = $("#query").val();
+        console.log(text);
+        window.location.href="http://39.107.76.182:8080/search?page=0&query="+text;
+
+    }
+
+
+</script>
+
+
+<!-- Main container -->
+<div class="page-container">
+    
+<!-- bloc-0 -->
+<div class="bloc bgc-white bg-mountains-italy d-bloc" id="bloc-0">
+	<div class="container bloc-md">
+		<div class="row">
+			<div class="col-sm-10">
+				<input id="query" type="text" class="form-control" placeholder="" style="height: 50px">
+			</div>
+			<div class="col-sm-2">
+				<div class="text-center">
+					<a onclick="doSearch($(this))" class="btn btn-d btn-lg">Search</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-0 END -->
+
+<!-- bloc-1 -->
+<div class="bloc bgc-white bg-mountains-italy d-bloc " id="bloc-1">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2 class="text-center mg-md">
+				</h2>
+			</div>
+		</div>
+		<div class="row voffset" >
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[0].previewUrl}" th:href="${pageInfo.content[0].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[0].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[1].previewUrl}" th:href="${pageInfo.content[1].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[1].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[2].previewUrl}" th:href="${pageInfo.content[2].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[2].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[3].previewUrl}" th:href="${pageInfo.content[3].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[3].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+		</div>
+		<div class="row voffset">
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[4].previewUrl}" th:href="${pageInfo.content[4].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[4].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[5].previewUrl}" th:href="${pageInfo.content[5].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[5].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[6].previewUrl}" th:href="${pageInfo.content[6].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[6].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+			<div class="col-sm-3" >
+				<div class="embed-responsive embed-responsive-16by9">
+					<img onclick="clickImg($(this))" class="embed-responsive-item lazyload" th:src="${pageInfo.content[7].previewUrl}" th:href="${pageInfo.content[7].videoPageUrl}">
+					</img>
+				</div>
+				<h3 class="mg-md title">
+					<span th:text="${pageInfo.content[7].title}"></span>
+				</h3>
+				<p>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-1 END -->
+
+	<button title="下一页" class="btn" onclick="nextPage()"></button>
+
+
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up"></span></a>
+<!-- ScrollToTop Button END-->
+
+
+<!-- Footer - bloc-2 -->
+<div class="bloc bgc-white bg-lake d-bloc" id="bloc-2">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-3">
+				<h3 class="mg-md bloc-mob-center-text">
+					About
+				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">The team</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Contact us</a>
+			</div>
+			<div class="col-sm-3">
+				<h3 class="mg-md bloc-mob-center-text">
+					Get the App
+				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">iPhone</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Android</a>
+			</div>
+			<div class="col-sm-3">
+				<h3 class="mg-md bloc-mob-center-text">
+					Follow Us
+				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">Twitter</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Facebook</a>
+			</div>
+			<div class="col-sm-3">
+				<h3 class="mg-md bloc-mob-center-text">
+					Company
+				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">Terms of use</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Privacy</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Footer - bloc-2 END -->
+
+</div>
+<!-- Main container END -->
+    
+
+
+<!-- Preloader -->
+<div id="page-loading-blocs-notifaction"></div>
+<!-- Preloader END -->
+
+
+
+
+
+</body>
+</html>

@@ -164,16 +164,16 @@ public class RedisService {
         allKVs.sort(new Comparator<VideoContent>() {
             @Override
             public int compare(VideoContent o1, VideoContent o2) {
-                long time = o1.getCreated().getTime() - o2.getCreated().getTime();
+                long time = o2.getCreated().getTime() - o1.getCreated().getTime();
                 return (int) time;
             }
         });
         List<List<VideoContent>> partition = Lists.partition(allKVs, 8);
-        if (page > partition.size()) {
+        if (page >= partition.size()) {
             return new ArrayList<VideoContent>();
         }
 
-        return partition.get(page-1);
+        return partition.get(page);
     }
 
 
