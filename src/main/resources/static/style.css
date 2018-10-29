@@ -629,3 +629,13 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 }
  }
 
+.pageBtn{
+	height: 50px;
+	width: 12%;
+	text-align: center;
+	margin-left: 44%;
+	margin-right: 44%;
+	background-color: #000000;
+	font-size: 18px;
+}
+
