@@ -83,11 +83,13 @@
 		if (page == null) {
 		    page = 0;
 		}
+        page = parseInt(page);
+		page = page+1;
 		var text = getQueryString("query");
 		if (text == null){
 		    text = "";
 		}
-        window.location.href="http://39.107.76.182:8080/search?page="+(page+1)+"&query="+text;
+        window.location.href="http://39.107.76.182:8080/search?page="+page+"&query="+text;
     }
 
 
