@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 
 import java.util.Date;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Author: buku.ch
@@ -30,6 +31,8 @@ public class FetchRunnable implements Runnable {
     private VideoContentRepository videoContentRepository;
 
     private VideoContent videoContent;
+
+    private static ReentrantLock lock = new ReentrantLock();
 
     public void setContent(VideoContent content) {
         this.videoContent = content;
@@ -50,21 +53,32 @@ public class FetchRunnable implements Runnable {
 
         String path = "failed";
 
+        lock.lock();
         Integer fileNum = redisService.get("fileNum", Integer.class);
         if (fileNum == null) {
             redisService.set("fileNum", 0, -1);
-            path = HttpDownload.download(videoContent.getVideoUrl());
-            if (!"fail".equals(path)) {
-                logger.info("download complete:   "+path+"   url:   "+videoContent.getVideoUrl());
-                redisService.incr("fileNum");
-            }
+            redisService.incr("fileNum");
         } else if (fileNum < Constants.MAX_FILE_NUM) {
-            path = HttpDownload.download(videoContent.getVideoUrl());
-            if (!"fail".equals(path)) {
-                logger.info("download complete:   "+path+"   url:   "+videoContent.getVideoUrl());
-                redisService.incr("fileNum");
-            }
+            redisService.incr("fileNum");
+        } else {
+            return;
         }
+        lock.unlock();
+
+
+        path = HttpDownload.download(videoContent.getVideoUrl());
+
+        lock.lock();
+        if (!"fail".equals(path)) {
+            logger.info("download complete:   "+path+"   url:   "+videoContent.getVideoUrl());
+        }else {
+            // 回滚redis字段
+            redisService.decr("fileNum");
+        }
+        lock.unlock();
+
+
+
 
         videoContent.setFilePath(path);
 
